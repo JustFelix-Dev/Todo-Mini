@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ 
+</style>
+<body>
+
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita fugiat iure dolorum dolorem totam voluptatem, dignissimos unde magni molestias dolore dicta eaque perferendis repellat assumenda eum eius minima autem aperiam? Non corporis reprehenderit modi! Et voluptas omnis voluptatum iste porro beatae quae ex in libero itaque, est dolorem obcaecati similique, praesentium at distinctio error. Molestiae eum fugiat porro magnam quas saepe voluptates atque quaerat obcaecati debitis dignissimos eaque deleniti quam impedit esse voluptatum, inventore sed nobis dolorem eligendi ipsum accusantium? Voluptas eius facere maxime ratione quis molestiae saepe velit amet perferendis rem accusamus doloribus, architecto eveniet deserunt blanditiis dolores ut?</p>
+    
+
+
+<!-- <body> <form name="myForm" action="" onsubmit="return form()" method="post">
+    <input type="text" id="fname">
+    <button >Submit</button>
+      </form> -->
+     <!-- <div id="display">
+        <p id="p1">My First Paragraph</p>
+        <p>My Second Paragraph</p>
+        <p>My Third Paragraph</p>
+     </div>
+     <hr> -->
+     <button onclick="myVar = setTimeout(newPage,5000);">Alert</button>
+     <button onclick="stop()">Stop</button>
+       <div id="cookie">
+
+       </div>
+      <!-- <div onmousedown="mDown(this)" onmouseup="moOver(this)">Mouse Over Me!</div>
+      <input type="text" onfocus="focusing(this)"> -->
+    <script>
+        getText("myCSSlist.txt");
+
+        async function getText(file){
+            let myObj = await fetch(file)
+            let newText = await file.text()
+            cookie.innerHTML = newText;
+        }
+      
+    //     newPage=()=>{
+    //         alert('Hii\nFelix,how can i help you today ?')
+    // };
+    //     stop=()=>{clearTimeout(myVar)}
+    //    myNavigator =  document.getElementById("cookie");
+    //     myNavigator.innerHTML = navigator.cookieEnabled;
+    //     myNavigator.innerHTML = navigator.appName;
+        
+    //     const newP = document.createElement("p");
+    //     const newText = document.createTextNode("My Fourth Paragraph");
+    //    newTag =  newP.appendChild(newText);
+    //     const element = document.getElementById('display');
+    //     const child = document.getElementById('p1');
+    //     element.insertBefore(newTag,child);
+
+    //     function remove(){
+    //         document.getElementById('p1').remove();
+    //     }
+    //     let p1 = 4;
+    //     let p2 = 78;
+    //    button = document.getElementById('btn2');
+    //   button.addEventListener('click', function(){myCalc(p1,p2)});
+    //   function myCalc(a,b){
+    //     disp1.innerHTML += a + b + "<br>";
+    // }
+
+        // window.addEventListener('resize',myresize);
+        // function myresize(){
+        //     disp.innerHTML = Math.random();
+        // }
+
+    //     focusing=(disp)=>{
+    //         disp.style.backgroundColor= "green";
+    //     }
+    //     mDown=(over)=>{
+    //     over.style.backgroundColor = "green";
+    //     over.innerHTML= "You are hovering me!";
+    // }
+    // moOver=(over)=>{
+    // over.style.backgroundColor = "orangered";
+    // over.innerHTML = "Thank You!. I'm better";
+    //     }
+    //     var button = document.getElementById('btn');
+    //     button.addEventListener('mouseover',myfunction);
+    //     button.addEventListener('mouseout',mySecondFunction);
+    //     button.addEventListener('click', myThirdFunction);
+
+    //    function myfunction() {
+    //     disp.innerHTML += "You just moved over me"+"<br>";
+    //    }
+    //    function mySecondFunction(){
+    //     disp.innerHTML += "You just moved out of me"+"<br>";
+    //    }
+
+    //    function myThirdFunction(){
+    //      disp.innerHTML += "You clicked me right now!"+"<br>";
+    //     }
+
+    //   function form(){
+    //       let x = document.forms["myForm"]["fname"].value;
+    //       if(x==""){
+    //         alert("Name has to be filled dear")
+    //         return false;
+    //       }
+    //   }
+    //   const x =  document.getElementsByClassName("intro");
+    //   disp.innerHTML = x[0].innerHTML;
+    // const x = document.querySelectorAll("p.intro");
+    // // disp.innerHTML = x[0].innerHTML;
+    // function change(){
+    //     document.getElementById('img1').src = "undraw_well_done_re_3hpo.svg"
+    // }
+
+    </script>
+    </body>
+</html>

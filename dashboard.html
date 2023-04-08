@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        background-color: yellow;
+    }
+    tr {
+        text-align: center;
+    }
+</style>
+
+<body>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Details:</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="ntitle" class="form-label">Title:</label>
+          <input type="text" id="ntitle" class="form-control">
+          <label for="ncategory" class="form-label">Category:</label>
+          <input type="text" id="ncategory" class="form-control">
+          <label for="ntime" class="form-label">Time:</label>
+          <input type="time" id="ntime" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="updateTodo()" >Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <h1 id="disp"></h1>
+    <hr>
+    <input type="text" placeholder="Your Todo-Title" id="title">&nbsp;<input type="text"
+        placeholder="Your Todo-Category" id="category">&nbsp;<input type="time" required id="time"> <button
+        onclick="addTodo()">Add Todo</button>&nbsp;<button onclick="delAll()">Delete All</button> <br><br>
+        <h2 id="disp1" style="display:none;">
+
+        </h2>
+    <div  >
+        <table border="2" id="render" class="table table-striped table-dark" width="100%" style="display:none;">
+
+        </table>
+    </div>
+    <script>
+        var allUsers = JSON.parse(localStorage.getItem('localAllUsers'));
+        var userIndex = JSON.parse(localStorage.getItem('currentIndex'));
+        disp.innerHTML = `Hi, Welcome ${allUsers[userIndex].firstName}😊`
+        disp.style.color = "black"
+        var editedIndex = 0;
+
+        function addTodo() {
+            disp1.style.display = "none";
+            if(title.value =="" || category.value == "" || time.value ==""){
+                alert('Please check your inputs correctly. All inputs must be filled.')
+            }else{
+                var userTodo = {
+                todoTitle: title.value,
+                todoCategory: category.value,
+                todoTime: time.value,
+            }
+            allUsers[userIndex].allTodo.push(userTodo)
+            localStorage.setItem('localAllUsers', JSON.stringify(allUsers))
+            displayTodo()
+            title.value = ""; time.value = ""; category.value = "";
+        }
+    }
+    JSON.parse(localStorage.getItem('localAllUsers'))
+      displayTodo()
+
+        function displayTodo() {  
+          currentUser = allUsers[userIndex].allTodo
+          render.style.display = "table";
+          render.innerHTML = `
+                  <tr>
+                  <th>S/N</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Time</th>
+                  <th>Actions</th>
+                  </tr>`
+            for (let index = 0; index < currentUser.length; index++) {
+            render.innerHTML += `
+                            <tr>
+                                <td>${index+1}</td>
+                               <td>${currentUser[index].todoTitle}</td> 
+                               <td>${currentUser[index].todoCategory}</td> 
+                               <td>${currentUser[index].todoTime}</td> 
+                               <td><button class="btn btn-hover" style="background-color:orangered;"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="editTodo(${index})">Edit User</button>
+                                <button onclick="deleteTodo(${index})" class="btn" style="background-color:black;color:white;">Delete User</button> </td> 
+                                </tr>
+                              `
+        }
+                
+            }
+
+            function deleteTodo(btndel){
+                var userResponse = confirm('This user details would be permanently deleted. Click "Ok" to confirm')
+            if (userResponse == true) {
+                currentUser.splice(btndel, 1)
+                localStorage.setItem('localAllUsers', JSON.stringify(allUsers))
+                displayTodo()
+            } else {}
+            }
+          
+
+
+            function delAll() {
+            userResponse = confirm('Are you sure you would like to delete all items?. Please note that this process is irreversible')
+            if (userResponse == true) {
+                currentUser.splice(0)
+                localStorage.setItem('localAllUsers', JSON.stringify(allUsers))
+                disp1.innerHTML = `You no longer have any items,${allUsers[userIndex].firstName} .Kindly make one.`
+                disp1.style.display = "block";
+                disp1.style.color = "red";
+                displayTodo()
+                render.style.display = "none";
+
+            } else { }
+        }
+       
+        function editTodo(editbtn){
+            editedIndex = editbtn
+            ntitle.value = currentUser[editbtn].todoTitle
+            ncategory.value = currentUser[editbtn].todoCategory
+            ntime.value = currentUser[editbtn].todoTime
+
+        }
+
+        function updateTodo(){
+            var newTodo = {
+                todoTitle: ntitle.value,
+                todoCategory: ncategory.value,
+                todoTime: ntime.value,
+            }
+            currentUser.splice(editedIndex,1,newTodo)
+            localStorage.setItem('localAllUsers', JSON.stringify(allUsers))
+            displayTodo()
+            }
+
+        
+          
+    </script>
+
+</body>
+
+</html>
